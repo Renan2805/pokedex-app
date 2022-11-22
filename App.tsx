@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { View, ActivityIndicator } from 'react-native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationContainer } from '@react-navigation/native'
 // Icons
@@ -6,6 +8,7 @@ import { FontAwesome } from '@expo/vector-icons';
 
 // Screens
 import PokemonList from './screens/PokemonList'
+import Pokemon from './screens/Pokemon';
 
 // Fonts
 import { useFonts } from 'expo-font'
@@ -13,9 +16,6 @@ import {
   Poppins_400Regular,
   Poppins_700Bold
 } from '@expo-google-fonts/poppins'
-import { View, ActivityIndicator } from 'react-native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Pokemon from './screens/Pokemon';
 
 export default function App() {
 
@@ -66,7 +66,7 @@ const PokemonStack = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name={'PokemonList'} component={PokemonList} />
-      <Stack.Screen name={'Pokemon'} component={Pokemon}/>
+      <Stack.Screen name={'Pokemon'} component={Pokemon} initialParams={{url: ''}}/>
     </Stack.Navigator>
   )
 }

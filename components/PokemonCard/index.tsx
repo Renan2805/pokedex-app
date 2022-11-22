@@ -16,7 +16,12 @@ const PokemonCard = (props: Props) => {
     name: '',
     url: '#',
     sprites: {
-      front_default: ''
+      front_default: '',
+      other: {
+        'official-artwork': {
+          front_default: ''
+        }
+      }
     },
     types: [
       {
@@ -26,7 +31,8 @@ const PokemonCard = (props: Props) => {
       }
     ],
     height: 0,
-    weight: 0
+    weight: 0,
+    order: 0
   })
 
   useEffect(() => {
@@ -45,12 +51,14 @@ const PokemonCard = (props: Props) => {
     // @ts-ignore
     <TouchableOpacity style={styles.card} onPress={() => navigation.navigate('Pokemon', {url: props.pokemonUrl})}>
       <Image 
-        source={{uri: pokemon.sprites.front_default}}
+        source={{uri: pokemon.sprites.other['official-artwork'].front_default}}
         style={styles.sprite}
       />
       <View style={{width: '100%', marginLeft: 10}}>
-        <Text style={styles.name}>{capitalizeFirstLetter(pokemon.name)}</Text>
-        
+        <View style={[styles.types, {alignItems: 'center', width: '70%'}]}>
+          <Text style={styles.name}>{capitalizeFirstLetter(pokemon.name)}</Text>
+          <Text style={styles.type}>#{pokemon.order}</Text>
+        </View>
         <View style={styles.types}>
           {
             pokemon.types.map((type, index) => {
@@ -83,8 +91,8 @@ const styles = StyleSheet.create({
     borderRadius: 15
   },
   sprite: {
-    width: 100, 
-    height: 100, 
+    width: '25%',
+    aspectRatio: 1 / 1, 
     borderTopLeftRadius: 15,
     borderBottomLeftRadius: 15
   },

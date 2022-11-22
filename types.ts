@@ -41,7 +41,12 @@ type Type = {
 export type PokemonType = {
   name: string,
   sprites: {
-    front_default: string
+    front_default: string,
+    other: {
+      'official-artwork': {
+        front_default: string
+      }
+    }
   },
   types: Array<Type>
 }
